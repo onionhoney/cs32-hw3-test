@@ -73,8 +73,12 @@ echo
 echo "--> testing landmark.cpp ..."
 make -s landmark || {
     echo "*** FATAL ERROR ***";
-    echo
+    echo ;
     echo "landmark.cpp does not compile";
+    echo ;
+    echo "NOTE: What you'll turn in for this problem will
+be a file named landmark.cpp containing the definitions and
+implementations of the four classes, and nothing more";
 }
 [[ -x landmark.out ]] && ./landmark.out > output
 if ! diff -u expected output
@@ -89,9 +93,9 @@ echo
 echo "--> testing linear.cpp ..."
 make -s linear || {
     echo "*** FATAL ERROR ***";
-    echo
+    echo ;
     echo "linear.cpp does not compile";
-    echo
+    echo ;
     echo "NOTE: you will turn in one file named
 linear.cpp that contains the five functions and
 nothing more: no implementation of somePredicate
@@ -104,9 +108,9 @@ echo
 echo "--> testing maze.cpp ..."
 make -s maze || {
     echo "*** FATAL ERROR ***";
-    echo
+    echo ;
     echo "maze.cpp does not compile";
-    echo
+    echo ;
     echo "NOTE: you will turn in one file named maze.cpp
 that contains the Coord class (if you use it) and the
 pathExists function and nothing more";
@@ -118,9 +122,9 @@ echo
 echo "--> testing tree.cpp ..."
 make -s tree || {
     echo "*** FATAL ERROR ***";
-    echo
+    echo ;
     echo "tree.cpp does not compile";
-    echo
+    echo ;
     echo "NOTE: you will turn in one file named tree.cpp
 that contains the four functions above and nothing more";
 }

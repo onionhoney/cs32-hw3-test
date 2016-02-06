@@ -15,8 +15,8 @@ clean :
 	rm -f *.o *.out
 
 
-landmark : landmark.cpp
-	$(CXX) $(CPPFLAGS) -o landmark.out landmark.cpp
+landmark : test_landmark.cpp
+	$(CXX) $(CPPFLAGS) -o landmark.out test_landmark.cpp
 
 linear : linear.cpp test_linear.cpp
 	$(CXX) $(CPPFLAGS) -o linear.out linear.cpp test_linear.cpp
