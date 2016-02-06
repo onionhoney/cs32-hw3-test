@@ -23,6 +23,13 @@ for f in "${files[@]}"; do
 done
 
 
+# compatibility with lnxsrv
+if [[ "$HOSTNAME" == *"lnxsrv"* ]]; then
+    sed 's/CXX *= *g++/CXX = g32/g' < makefile > tmp
+    mv tmp makefile
+fi
+
+
 # make sure linear.cpp can compile
 echo "bool somePredicate(double x);" > tmp.cpp
 cat linear.cpp >> tmp.cpp
