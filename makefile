@@ -4,44 +4,25 @@ CPPFLAGS = -std=c++11 -Wall -Wextra \
            -Wno-sign-compare -Werror=return-type
 
 ifeq ($(CXX),g32)
-	CPPFLAGS -= -std=c++11 -Wall -Wextra
-	CPPFLAGS -= -Wno-sign-compare -Werror=return-type
+	CPPFLAGS =
 endif
 
 
-all : stack queue eval
-
-
-stack : test_maze.o mazestack.o
-	$(CXX) $(CPPFLAGS) -o stack.out test_maze.o mazestack.o
-
-
-queue : test_maze.o mazequeue.o
-	$(CXX) $(CPPFLAGS) -o queue.out test_maze.o mazequeue.o
-
-
-eval : test_eval.o eval.o Map.o
-	$(CXX) $(CPPFLAGS) -o eval.out test_eval.o eval.o Map.o
+all : landmark linear maze tree
 
 
 clean :
-	rm -f *.o *.out
+	rm *.o *.out
 
 
-mazestack.o : mazestack.cpp
-	$(CXX) $(CPPFLAGS) -c mazestack.cpp
+landmark : landmark.cpp
+	$(CXX) $(CPPFLAGS) -o landmark.out landmark.cpp
 
-mazequeue.o : mazequeue.cpp
-	$(CXX) $(CPPFLAGS) -c mazequeue.cpp
+linear : linear.cpp test_linear.cpp
+	$(CXX) $(CPPFLAGS) -o linear.out linear.cpp test_linear.cpp
 
-eval.o : eval.cpp Map.h
-	$(CXX) $(CPPFLAGS) -c eval.cpp
+maze : maze.cpp test_maze.cpp
+	$(CXX) $(CPPFLAGS) -o maze.out maze.cpp test_maze.cpp
 
-Map.o : Map.cpp Map.h
-	$(CXX) $(CPPFLAGS) -c Map.cpp
-
-test_maze.o : test_maze.cpp
-	$(CXX) $(CPPFLAGS) -c test_maze.cpp
-
-test_eval.o : test_eval.cpp Map.h
-	$(CXX) $(CPPFLAGS) -c test_eval.cpp
+tree : tree.cpp test_tree.cpp
+	$(CXX) $(CPPFLAGS) -o tree.out tree.cpp test_tree.cpp
