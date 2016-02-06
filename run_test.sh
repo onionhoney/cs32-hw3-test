@@ -16,6 +16,7 @@ function cleanup {
     for f in "${files[@]}"; do
         rm "$f"
     done
+    rm output
 }
 
 for f in "${files[@]}"; do
