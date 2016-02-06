@@ -11,24 +11,23 @@ bool pathExists(std::string maze[], int nRows, int nCols,
                 int sr, int sc, int er, int ec);
 
 
-const string MAZE[10] = {
-    "XXXXXXXXXX",
-    "X........X",
-    "XX.X.XXXXX",
-    "X..X.X...X",
-    "X..X...X.X",
-    "XXXX.XXX.X",
-    "X.X....XXX",
-    "X..XX.XX.X",
-    "X...X....X",
-    "XXXXXXXXXX"
-};
-
 const int TOTAL_TEST_CASE = 9;
 
 bool test(int testIndex) {
     // testIndex : index of the test number
     // corresponding to switch statement
+    string MAZE[] = {
+        "XXXXXXXXXX",
+        "X........X",
+        "XX.X.XXXXX",
+        "X..X.X...X",
+        "X..X...X.X",
+        "XXXX.XXX.X",
+        "X.X....XXX",
+        "X..XX.XX.X",
+        "X...X....X",
+        "XXXXXXXXXX"
+    };
 
     switch (testIndex) {
     case 0:

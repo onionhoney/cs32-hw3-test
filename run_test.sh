@@ -74,7 +74,11 @@ make -s landmark || {
     echo "*** FATAL ERROR ***";
     echo -e "\nlandmark.cpp does not compile\n";
 }
-[[ -x landmark.out ]] && ./landmark.out
+[[ -x landmark.out ]] && ./landmark.out >> output
+if ! diff -u expected output
+then
+    echo "*** UNEXPECTED OUTPUT ***"
+fi
 
 
 echo

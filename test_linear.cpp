@@ -2,6 +2,7 @@
 
 
 #include <iostream>
+#include <string>
 #include "testing.h"
 
 using namespace std;
