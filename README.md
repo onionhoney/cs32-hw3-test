@@ -1,15 +1,17 @@
-# CS32 Homework 2 Test
-A test for homework 2 for CS 32 in UCLA.
+# CS32 Homework 3 Test
+A test for homework 3 for CS 32 in UCLA.
 
 
 
 ### Quick Start for Mac
 
-1. Click [here](https://github.com/onionhoney/cs32-hw2-test/archive/master.zip) to download the zip file, and unzip it.
+1. Click [here](https://github.com/onionhoney/cs32-hw3-test/archive/master.zip)
+   to download the zip file, and unzip it.
 2. Copy the unzipped folder (not the files) to the directory where all your source
-files are located.
+   files are located.
 3. Open the folder and right click on **LaunchTest.app**, select "Open" and confirm.
-4. Now your tests are ready to be served! A Terminal window will be opened that shows your test result.
+4. Now your tests are ready to be served! A Terminal window will be opened that
+   shows your test result.
 
 See 'Running the test' section for an alternative way to start, if you're using
 Linux or if something goes wrong with LaunchTest.app.
@@ -44,7 +46,7 @@ take any responsibility in case of any accident.
 
 ---
 
-### Running the test 
+### Running the test
 
 All code are expected to run in command line under
 a \*nix system.
@@ -56,15 +58,11 @@ are located
 
 Second, clone this repository
 
-`git clone https://github.com/onionhoney/cs32-hw2-test.git`
-
-Or if you want to try out the development branch:
-
-`git clone https://github.com/colinxy/cs32-hw2-test.git`
+`git clone https://github.com/onionhoney/cs32-hw3-test.git`
 
 Then, cd into this directory
 
-`cd cs32-hw2-test`
+`cd cs32-hw3-test`
 
 and to execute it, first make it executable
 
