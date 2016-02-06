@@ -69,23 +69,28 @@ fi
 # testing begin
 
 echo
-echo "testing landmark.cpp ..."
+echo "--> testing landmark.cpp ..."
 make -s landmark || {
     echo "*** FATAL ERROR ***";
-    echo -e "\nlandmark.cpp does not compile\n";
+    echo
+    echo "landmark.cpp does not compile";
 }
-[[ -x landmark.out ]] && ./landmark.out >> output
+[[ -x landmark.out ]] && ./landmark.out > output
 if ! diff -u expected output
 then
     echo "*** UNEXPECTED OUTPUT ***"
+else
+    echo "landmark PASSED"
 fi
 
 
 echo
-echo "testing linear.cpp ..."
+echo "--> testing linear.cpp ..."
 make -s linear || {
     echo "*** FATAL ERROR ***";
-    echo -e "\nlinear.cpp does not compile\n";
+    echo
+    echo "linear.cpp does not compile";
+    echo
     echo "NOTE: you will turn in one file named
 linear.cpp that contains the five functions and
 nothing more: no implementation of somePredicate
@@ -95,10 +100,12 @@ and no main routine";
 
 
 echo
-echo "testing maze.cpp ..."
+echo "--> testing maze.cpp ..."
 make -s maze || {
     echo "*** FATAL ERROR ***";
-    echo -e "\nmaze.cpp does not compile\n";
+    echo
+    echo "maze.cpp does not compile";
+    echo
     echo "NOTE: you will turn in one file named maze.cpp
 that contains the Coord class (if you use it) and the
 pathExists function and nothing more";
@@ -107,10 +114,12 @@ pathExists function and nothing more";
 
 
 echo
-echo "testing tree.cpp ..."
+echo "--> testing tree.cpp ..."
 make -s tree || {
     echo "*** FATAL ERROR ***";
-    echo -e "\ntree.cpp does not compile\n";
+    echo
+    echo "tree.cpp does not compile";
+    echo
     echo "NOTE: you will turn in one file named tree.cpp
 that contains the four functions above and nothing more";
 }

@@ -231,7 +231,7 @@ int main() {
 
     cout << "PASSED " << includes_passed
          << " OUT OF " << TOTAL_INCLUDES << endl;
-    cout << "=== END OF includes ===" << endl << endl;
+    cout << "=== END OF includes ===" << endl;
 
 
     return 0;
