@@ -12,7 +12,7 @@ all : landmark linear maze tree
 
 
 clean :
-	rm *.o *.out
+	rm -f *.o *.out
 
 
 landmark : landmark.cpp
