@@ -48,6 +48,12 @@ take any responsibility in case of any accident.
 
 ### Running the test
 
+##### Update
+
+The code is fully compatible with SEASNET server.
+Please following the instructions below to run the test.
+
+
 All code are expected to run in command line under
 a \*nix system.
 
@@ -72,12 +78,13 @@ and run it with
 
 `./run_test.sh`
 
-If the test output ends with the following line,
+Please inspect the output carefully, because the output
+is designed to aid you in finding your own bug
+as much as possible.
 
-```
-****** ALL TESTS PASSED ******
-```
+The test is divided into several sections to
+test your code thoroughly. If your code passes
+all the sections, your code passes the test.
 
-your code passes the test. Be sure to read
-the error message carefully as it contains
-useful information for debugging your code.
+Read the output message carefully to see if
+you have passed all tests
