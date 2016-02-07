@@ -121,7 +121,7 @@ bool test_indexOfMin(int testIndex) {
 }
 
 
-const int TOTAL_INCLUDES = 4;
+const int TOTAL_INCLUDES = 5;
 bool test_includes(int testIndex) {
     double a[] {10, 50, 40, 20, 50, 40, 30};
     double b1[] {50, 20, 30};
@@ -141,6 +141,8 @@ bool test_includes(int testIndex) {
 
     case 3:
         return check(!includes(a, 7, b4, 3));
+    case 4:
+        return check(includes(a, 7, b1, 0));
 
     default:
         return false;
