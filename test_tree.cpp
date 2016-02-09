@@ -17,7 +17,31 @@ void split(double a[], int n, double splitter,
 void order(double a[], int n);
 
 
-const int TOTAL_INCLUDES = 7;
+int solution_includes(const double a1[], int n1, const double a2[], int n2)
+{
+  if (n2 == 0) return 1;
+  if (n1 == 0) return 0;
+  if (a1[n1 - 1] == a2[n2 - 1])
+    return solution_includes(a1, n1 - 1, a2, n2 - 1) +
+      solution_includes(a1, n1 - 1, a2, n2);
+  else return solution_includes(a1, n1-1 , a2, n2);
+}
+bool test_includes_randomized(){
+  cout << "=== RUNNING RANDOMIZED TEST FOR countIncludes===" << endl;
+  const int SIZE_A = 300, SIZE_B = 5;
+  double a[SIZE_A], b[SIZE_B];
+  for (int i = 0; i < SIZE_A; ++i) {
+      a[i] = rand() % 10;
+  }
+  for (int i = 0; i < SIZE_B; ++i){
+      b[i] = rand() % 10;
+  }
+  cout << solution_includes(a, SIZE_A, b, SIZE_B) << endl;
+  return solution_includes(a, SIZE_A, b, SIZE_B) ==
+    countIncludes(a, SIZE_A, b, SIZE_B);
+}
+
+const int TOTAL_INCLUDES = 10;
 bool test_includes(int testIndex) {
     double a[] {10, 50, 40, 20, 50, 40, 30};
     double b1[] {10, 20, 40};
@@ -28,13 +52,13 @@ bool test_includes(int testIndex) {
     switch (testIndex) {
         case 0:
             return check(countIncludes(a, 7, b1, 3) == 1);
-            
+
         case 1:
             return check(countIncludes(a, 7, b2, 3) == 2);
-            
+
         case 2:
             return check(countIncludes(a, 7, b3, 3) == 0);
-            
+
         case 3:
             return check(countIncludes(a, 7, b4, 3) == 3);
 
@@ -47,6 +71,10 @@ bool test_includes(int testIndex) {
         case 6:
             return check(countIncludes(a, 0, b1, 3) == 0);
 
+        case 7:
+        case 8:
+        case 9:
+          return check("Randomized test: " && test_includes_randomized());
         default:
             return false;
     }
@@ -69,7 +97,7 @@ bool test_order() {
 
     // trivial test
     cout << "=== RUNNING TRIVIAL TEST FOR order ===" << endl;
-    
+
     bool trivial_passed = true;
     order(a, sizeof(a) / sizeof(double));
     double last = a[0];
@@ -92,7 +120,7 @@ bool test_order() {
     double d_arr[SIZE];
     srand(time(nullptr));
     for (int i = 0; i < SIZE; ++i) {
-        d_arr[i] = rand();
+        d_arr[i] = rand() % 100000;
     }
 
     bool randomized_passed = true;
@@ -115,8 +143,10 @@ bool test_order() {
 }
 
 
+
 int main() {
     cout << "=== TESTING countIncludes ===" << endl;
+    srand(time(nullptr));
 
     int countIncludes_passed = 0;
     for (int i = 0; i < TOTAL_INCLUDES; ++i) {
