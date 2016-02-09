@@ -1,8 +1,11 @@
 #! /bin/sh
 
 # immediate exit in case of any failure
-set -e
+ set -e
 
+# Debug trick: Stop at every line
+# set -x
+# trap read debug
 
 declare -a files=(
     "landmark.cpp"
@@ -19,58 +22,85 @@ function cleanup {
     rm output
 }
 
+function checkLoop {
+    # strip single line comment
+    sed 's/\/\/.*$//g' < $1 > tmp.cpp
+    mv tmp.cpp $1
+
+    if grep "\(while\|for\|goto\|static\)" $1
+    then
+        echo "*** KEY WORD CHECK FAIL ***"
+
+        echo "your solution must not use the keywords while, for, or goto.
+    You must not use variables declared with the keyword static"
+    fi
+
+}
+
+function checkComment {
+    # Primitive: check if lines with comment accounts for at least 10% of the program
+    n_comment=`cat $1 | grep '//' | wc -l`
+    n_line=`cat $1 | wc -l`
+    if [[ $((n_comment * 100 / n_line))  -lt 10 ]]; then
+        echo "HINT: To not lose points, you may want to add more comments for $1 ." 
+    fi
+}
+
+function animateLoading {
+    # Better visual effect. Will be integrated to show real progress later.
+    # Cool animation
+    for (( i=0; i<30; i++ ));  do
+        sleep 0.015;
+        printf "."
+    done
+    printf "DONE\n"
+}
+#{ cleanup; } > /dev/null
+
+printf "=== COPYING FILES ..."
 for f in "${files[@]}"; do
     cp ../"$f" .
+    printf "......"
 done
+printf "DONE\n" 
 
+printf "=== OPTIMIZING FOR YOUR OPERATING SYSTEM..."
 
 # compatibility with lnxsrv
 if [[ "$HOSTNAME" == *"lnxsrv"* ]]; then
     sed 's/CXX *= *g++/CXX = g32/g' < makefile > tmp
     mv tmp makefile
 fi
+animateLoading
 
 
-# make sure linear.cpp can compile
+# make sure linear.cpp doesn't contain somePredicate
+printf "=== RUNNING SANITY TEST..."
+animateLoading
 echo "bool somePredicate(double x);" > tmp.cpp
 cat linear.cpp >> tmp.cpp
 mv tmp.cpp linear.cpp
 
 
+# comment check
+printf "=== LOOKING FOR HUMOROUS COMMENTS..."
+animateLoading
+for f in "${files[@]}"; do
+    checkComment "$f";
+done
+
+
 # keyword check
+printf "=== CENSORING CURSE WORDS..."
+animateLoading
 
-# test for linear.cpp
-# strip single line comment
-sed 's/\/\/.*$//g' < linear.cpp > tmp.cpp
-mv tmp.cpp linear.cpp
-
-if grep "\(while\|for\|goto\|static\)" linear.cpp
-then
-    echo "*** KEY WORD CHECK FAIL ***"
-
-    echo "your solution must not use the keywords while, for, or goto.
-You must not use variables declared with the keyword static"
-fi
+checkLoop linear.cpp
+checkLoop maze.cpp
 
 
-# test for tree.cpp
-# strip single line comment
-sed 's/\/\/.*$//g' < tree.cpp > tmp.cpp
-mv tmp.cpp tree.cpp
-
-if grep "\(while\|for\|goto\|static\)" linear.cpp
-then
-    echo "*** KEY WORD CHECK FAIL ***"
-
-    echo "your solution must not use the keywords while, for, or goto.
-You must not use variables declared with the keyword static"
-fi
-
-
-# testing begin
-
-echo
-echo "--> testing landmark.cpp ..."
+echo;
+printf '>>> testing landmark.cpp ...'
+animateLoading
 make -s landmark || {
     echo "*** FATAL ERROR ***";
     echo ;
@@ -89,8 +119,9 @@ else
 fi
 
 
-echo
-echo "--> testing linear.cpp ..."
+echo;
+printf '>>> testing linear.cpp ...'
+animateLoading
 make -s linear || {
     echo "*** FATAL ERROR ***";
     echo ;
@@ -104,8 +135,9 @@ and no main routine";
 [[ -x linear.out ]] && ./linear.out
 
 
-echo
-echo "--> testing maze.cpp ..."
+echo;
+printf '>>> testing maze.cpp ...'
+animateLoading
 make -s maze || {
     echo "*** FATAL ERROR ***";
     echo ;
@@ -118,8 +150,9 @@ pathExists function and nothing more";
 [[ -x maze.out ]] && ./maze.out
 
 
-echo
-echo "--> testing tree.cpp ..."
+echo;
+printf '>>> testing tree.cpp ...'
+animateLoading
 make -s tree || {
     echo "*** FATAL ERROR ***";
     echo ;
