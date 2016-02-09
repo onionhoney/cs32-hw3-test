@@ -2,6 +2,7 @@
 
 
 #include <iostream>
+#include <iomanip>
 #include <cstdlib>
 #include <ctime>
 #include <string>
@@ -16,19 +17,35 @@ void split(double a[], int n, double splitter,
            int& firstNotGreater, int& firstLess);
 void order(double a[], int n);
 
-
-int solution_includes(const double a1[], int n1, const double a2[], int n2)
+int iterated_includes(const double a1[], int n1, const double a2[], int n2)
 {
-  if (n2 == 0) return 1;
-  if (n1 == 0) return 0;
-  if (a1[n1 - 1] == a2[n2 - 1])
-    return solution_includes(a1, n1 - 1, a2, n2 - 1) +
-      solution_includes(a1, n1 - 1, a2, n2);
-  else return solution_includes(a1, n1-1 , a2, n2);
+  int dp[n2];
+  for (int i = 0; i < n2; i++) dp[i] = 0;
+
+  for (int i = 0 ; i < n1; i++)
+    for (int j = n2 - 1; j >= 0; j--){
+      if (a2[j] == a1[i]){
+        if (j == 0) dp[j] += 1;
+        else if (i > 0) dp[j] += dp[j - 1];
+      }
+    }
+
+  return dp[n2 - 1];
 }
-bool test_includes_randomized(){
-  cout << "=== RUNNING RANDOMIZED TEST FOR countIncludes===" << endl;
-  const int SIZE_A = 300, SIZE_B = 5;
+
+long double nCr(int a, int b){
+  if (a < b) return 0;
+  long double sum = 1;
+  for (int i = 0; i < b; i++){
+    sum *= a;
+    --a;
+  }
+  for (int i = 1; i <= b; i++){
+    sum /= i;
+  }
+  return sum;
+}
+bool test_includes_randomized(int SIZE_A, int SIZE_B, int RANGE){
   double a[SIZE_A], b[SIZE_B];
   for (int i = 0; i < SIZE_A; ++i) {
       a[i] = rand() % 10;
@@ -36,9 +53,36 @@ bool test_includes_randomized(){
   for (int i = 0; i < SIZE_B; ++i){
       b[i] = rand() % 10;
   }
-  cout << solution_includes(a, SIZE_A, b, SIZE_B) << endl;
-  return solution_includes(a, SIZE_A, b, SIZE_B) ==
-    countIncludes(a, SIZE_A, b, SIZE_B);
+
+  int it_res = iterated_includes(a, SIZE_A, b, SIZE_B);
+
+  const clock_t begin_time = clock();
+  int rec_res = countIncludes(a, SIZE_A, b, SIZE_B);
+  float exec_time = float( clock() - begin_time) / CLOCKS_PER_SEC;
+  /*cout << "Recursive solution executed in: "
+       << setprecision(6) << float( clock () - begin_time) / CLOCKS_PER_SEC
+       << "seconds." << endl;
+  */
+
+  long double approx = nCr(SIZE_A + 1, SIZE_B);
+  long double expected_time = approx / 1000000000.0;
+  if (exec_time > expected_time) {
+
+    cout << ">>> FAILED: \n"
+         << "    Your solution executes in " << exec_time << " seconds, \n"
+         << "    which exceeds the expected time limit " << expected_time << " seconds,\n"
+         << "    that is derived from the number of calculations stated in the spec.\n";
+    cout << "    Data size: a1 = " << SIZE_A << " , a2 = " << SIZE_B
+         << " with range {0.." << RANGE - 1 << "} \n";
+  }
+  else{
+    cout << ">>> Your solution successfully executed in "
+         << setprecision(4) << exec_time << " seconds," << endl
+         << "    below the expected time limit." << endl;
+  }
+  cout << endl;
+
+  return it_res == rec_res;
 }
 
 const int TOTAL_INCLUDES = 10;
@@ -72,9 +116,17 @@ bool test_includes(int testIndex) {
             return check(countIncludes(a, 0, b1, 3) == 0);
 
         case 7:
+          cout << "=== RUNNING RANDOMIZED TEST, PLEASE BE PATIENT..." << endl;
+          cout << "=== However, if test program freezes for more than a minute\n"
+              << "=== it is likely that you implement your solution wrong." << endl;
+          cout << endl;
+          return check("Randomized test: " && test_includes_randomized(800, 5, 3));
+
         case 8:
+          return check("Randomized test: " && test_includes_randomized(2000, 3, 3));
+
         case 9:
-          return check("Randomized test: " && test_includes_randomized());
+          return check("Randomized test: " && test_includes_randomized(250, 10, 5));
         default:
             return false;
     }
