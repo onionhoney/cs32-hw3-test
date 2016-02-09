@@ -42,7 +42,7 @@ function checkComment {
     n_comment=`cat $1 | grep '//' | wc -l`
     n_line=`cat $1 | wc -l`
     if [[ $((n_comment * 100 / n_line))  -lt 10 ]]; then
-        echo "HINT: To not lose points, you may want to add more comments for $1 ." 
+        echo "HINT: To not lose points, you may want to add more comments for $1 ."
     fi
 }
 
@@ -50,7 +50,7 @@ function animateLoading {
     # Better visual effect. Will be integrated to show real progress later.
     # Cool animation
     for (( i=0; i<30; i++ ));  do
-        sleep 0.015;
+        sleep 0.01;
         printf "."
     done
     printf "DONE\n"
@@ -62,12 +62,12 @@ for f in "${files[@]}"; do
     cp ../"$f" .
     printf "......"
 done
-printf "DONE\n" 
+printf "DONE\n"
 
 printf "=== OPTIMIZING FOR YOUR OPERATING SYSTEM..."
 
 # compatibility with lnxsrv
-if [[ "$HOSTNAME" == *"lnxsrv"* ]]; then
+if [ "$HOSTNAME" == *"lnxsrv07"* ] || [ "$HOSTNAME" == *"lnxsrv09"* ] ; then
     sed 's/CXX *= *g++/CXX = g32/g' < makefile > tmp
     mv tmp makefile
 fi
