@@ -1,9 +1,8 @@
 # CS32 Homework 3 Test
-A test for homework 3 for CS 32 in UCLA.
+An automated test for homework 3 of CS 32 at UCLA.
 
 
-
-### Quick Start for Mac
+## Quick Start for Mac
 
 1. Click [here](https://github.com/onionhoney/cs32-hw3-test/archive/master.zip)
    to download the zip file, and unzip it.
@@ -18,20 +17,26 @@ Linux or if something goes wrong with LaunchTest.app.
 
 ---
 
-### DISCLAIMER
+## DISCLAIMER
 
 This test implements most of the requirements as specified in
 the project specification, along with additional components
 to test your project more thoroughly.
+
 However, passing this test does not guarantee that your code
 is entirely correct or will pass Smallberg's tests. It
 serves merely as a reassurance that your code is correct.
 It might also produce output helpful for debugging your code.
 
+The test code itself does not contain any valid solution or
+description thereof for the problem set to the best of the
+authors' knowledge, and the authors will not post test data 
+if it is a part of the assignment. 
+
 The code itself is written by mortals, and therefore it might
 contain bugs. If you are pretty sure your code is correct,
 but does not pass the test, please create an issue, or send
-an email to the author with a simple explanation as to why
+an email to the authors with a simple explanation as to why
 the test is not working.
 
 Because the test might automatically clean up itself after
@@ -41,12 +46,12 @@ the project specification or the instructions for running this
 test. Therefore, it is **STRONGLY ADVISED** to make a backup
 of your code before running the test.
 
-Run the test at your own discretion. The author does not
-take any responsibility in case of any accident.
+Run the test at your own discretion. The authors do not
+take any responsibility in case of any accident. 
 
 ---
 
-### Running the test
+## Running the test
 
 ##### Update
 
