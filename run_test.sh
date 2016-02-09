@@ -64,43 +64,33 @@ for f in "${files[@]}"; do
 done
 printf "DONE\n"
 
-printf "=== OPTIMIZING FOR YOUR OPERATING SYSTEM..."
+printf "=== OPTIMIZING FOR YOUR OPERATING SYSTEM ===\n"
 
 # compatibility with lnxsrv
 if [ "$HOSTNAME" == *"lnxsrv07"* ] || [ "$HOSTNAME" == *"lnxsrv09"* ] ; then
     sed 's/CXX *= *g++/CXX = g32/g' < makefile > tmp
     mv tmp makefile
 fi
-animateLoading
-
 
 # make sure linear.cpp doesn't contain somePredicate
-printf "=== RUNNING SANITY TEST..."
-animateLoading
+printf "=== RUNNING SANITY TEST ===\n"
 echo "bool somePredicate(double x);" > tmp.cpp
 cat linear.cpp >> tmp.cpp
 mv tmp.cpp linear.cpp
 
-
 # comment check
-printf "=== LOOKING FOR HUMOROUS COMMENTS..."
-animateLoading
+printf "=== LOOKING FOR HUMOROUS COMMENTS ===\n"
 for f in "${files[@]}"; do
     checkComment "$f";
 done
 
-
 # keyword check
-printf "=== CENSORING CURSE WORDS..."
-animateLoading
-
+printf "=== CENSORING CURSE WORD ===\n"
 checkLoop linear.cpp
 checkLoop maze.cpp
 
-
 echo;
-printf '>>> testing landmark.cpp ...'
-animateLoading
+printf '>>> testing landmark.cpp <<< \n'
 make -s landmark || {
     echo "*** FATAL ERROR ***";
     echo ;
@@ -120,8 +110,7 @@ fi
 
 
 echo;
-printf '>>> testing linear.cpp ...'
-animateLoading
+printf '>>> testing linear.cpp <<< \n'
 make -s linear || {
     echo "*** FATAL ERROR ***";
     echo ;
@@ -136,8 +125,7 @@ and no main routine";
 
 
 echo;
-printf '>>> testing maze.cpp ...'
-animateLoading
+printf '>>> testing maze.cpp <<< \n'
 make -s maze || {
     echo "*** FATAL ERROR ***";
     echo ;
@@ -151,8 +139,7 @@ pathExists function and nothing more";
 
 
 echo;
-printf '>>> testing tree.cpp ...'
-animateLoading
+printf '>>> testing tree.cpp <<< \n'
 make -s tree || {
     echo "*** FATAL ERROR ***";
     echo ;
